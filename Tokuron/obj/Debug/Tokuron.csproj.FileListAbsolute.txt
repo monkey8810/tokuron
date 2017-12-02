@@ -1,0 +1,12 @@
+C:\Users\tsujii\Documents\Visual Studio 2017\Projects\Tokuron\Tokuron\bin\Debug\Tokuron.exe
+C:\Users\tsujii\Documents\Visual Studio 2017\Projects\Tokuron\Tokuron\bin\Debug\Tokuron.pdb
+C:\Users\tsujii\Documents\Visual Studio 2017\Projects\Tokuron\Tokuron\obj\Debug\Tokuron.csprojResolveAssemblyReference.cache
+C:\Users\tsujii\Documents\Visual Studio 2017\Projects\Tokuron\Tokuron\obj\Debug\Tokuron.csproj.CoreCompileInputs.cache
+C:\Users\tsujii\Documents\Visual Studio 2017\Projects\Tokuron\Tokuron\obj\Debug\Tokuron.exe
+C:\Users\tsujii\Documents\Visual Studio 2017\Projects\Tokuron\Tokuron\obj\Debug\Tokuron.pdb
+F:\情報工学特論\Tokuron\Tokuron\bin\Debug\Tokuron.exe
+F:\情報工学特論\Tokuron\Tokuron\bin\Debug\Tokuron.pdb
+F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.csprojResolveAssemblyReference.cache
+F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.csproj.CoreCompileInputs.cache
+F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.exe
+F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.pdb
