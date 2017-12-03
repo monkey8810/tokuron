@@ -9,19 +9,19 @@ namespace Tokuron
     {
         static void Main(string[] args)
         {
+            int[] turn = new int[100000];
             /*** 適宜，必要な初期化処理 ***/
             int s;//状態を保存する変数
             int s_pre;//前状態を保存する変数
             int a;//行動を保存する変数
-            double gamma = 0.95, arufa = 0.1;
+            double gamma = 0.95, alpha = 0.1;
             double[,] Q = new double[16, 4];//状態行動価値を保存する変数
-            double r;//報酬を保存する変数
-            const int MAX_CYCLE = 10000;
+            double r; //報酬を保存する変数
+            const int MAX_CYCLE = 10000;    //学習回数
 
             //Cycleの進行
             for (int cycle = 0; cycle < MAX_CYCLE; cycle++)
             {
-                int turn = 0;
                 //Console.WriteLine((cycle + 1) + "回目");
                 Problem0.initState();
                 s = Problem0.getState();
@@ -30,24 +30,27 @@ namespace Tokuron
                 //Episodeの進行
                 while (true)
                 {
-
-                    /*for (int i = 2; i < 16; i++)
+                    /*
+                    //Q_tableの確認
+                    for (int i = 2; i < 16; i++)
                     {
                         for (int j = 0; j < 4; j++)
                         {
                             Console.Write(Q[i, j] + " ");
                         }
                         Console.WriteLine("");
-                    }*/
+                    }
+                    */
                     //行動決定
                     a = Problem0.step(s, Q);
                     //Console.WriteLine(a + "を実行");
-
+                    //行動前に状態を保存
                     s_pre = Problem0.getState();
-
-                    //行動aの実行＆報酬rの観測＆状態遷移
+                    //行動aの実行&報酬rの取得
                     r = Problem0.doAction(a);
-                    turn++;
+                    //行動後の状態に更新
+                    s = Problem0.getState();
+                    //次状態でQ値の最大値を取得
                     double max = Q[s, 0];
                     for (int i = 0; i < 4; i++)
                     {
@@ -59,10 +62,12 @@ namespace Tokuron
                     //ゴール判定
                     if (Problem0.getStateIsGoal())
                     {
-                        Q[s_pre, a] = Q[s_pre, a] + arufa * (r + gamma * 0 - Q[s_pre, a]);
+                        //Q_tableの更新(最後のみ次状態なし)
+                        Q[s_pre, a] = Q[s_pre, a] + alpha * (r + gamma * 0 - Q[s_pre, a]);
                         if (cycle % 100 == 0)
                         {
-                            Console.WriteLine(turn + "ターンで終了状態に到達");
+
+                            Console.WriteLine(cycle + "回目:" + turn[cycle] + "ターンで終了状態に到達");
                             //Qテーブル確認
                             for (int i = 2; i < 16; i++)
                             {
@@ -77,15 +82,26 @@ namespace Tokuron
                         //Console.WriteLine("");
                         break;
                     }
-                    Q[s_pre, a] = Q[s_pre, a] + arufa * (r + gamma * max - Q[s_pre, a]);
-                    //Console.WriteLine(r + "を獲得（報酬）");
-                    //Console.WriteLine("s'=" + Problem0.getState());
+                    //Q_tableの更新
+                    Q[s_pre, a] = Q[s_pre, a] + alpha * (r + gamma * max - Q[s_pre, a]);
 
-                    //次のEpisodeに備えてs := s'
-                    s = Problem0.getState();
-                    //Console.WriteLine("s=" + s_pre);
+                    //Console.WriteLine(r + "を獲得（報酬）");
+                    //Console.WriteLine("s(前状態)=" + s_pre);
+                    //Console.WriteLine("s'(次状態)=" + s);
                     //Console.WriteLine();
+                    turn[cycle]++;
                 }
+            }
+            for (int i = 0; i < 10000; i = i + 10)
+            {
+                int sum = 0;
+                for (int j = 0; j < 10; j++)
+                {
+                    sum += turn[i + j];
+                }
+                int heikin = 0;
+                heikin = sum / 10;
+                Console.WriteLine(i + ":" + heikin);
             }
             Console.In.ReadLine();
         }
