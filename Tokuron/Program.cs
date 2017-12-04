@@ -9,7 +9,7 @@ namespace Tokuron
     {
         static void Main(string[] args)
         {
-            int[] turn = new int[100000];
+            int[] turn = new int[1000000];
             /*** 適宜，必要な初期化処理 ***/
             int s;//状態を保存する変数
             int s_pre;//前状態を保存する変数
@@ -17,7 +17,7 @@ namespace Tokuron
             double gamma = 0.95, alpha = 0.1;
             double[,] Q = new double[16, 4];//状態行動価値を保存する変数
             double r; //報酬を保存する変数
-            const int MAX_CYCLE = 10000;    //学習回数
+            const int MAX_CYCLE = 1000000;    //学習回数
 
             //Cycleの進行
             for (int cycle = 0; cycle < MAX_CYCLE; cycle++)
@@ -64,9 +64,8 @@ namespace Tokuron
                     {
                         //Q_tableの更新(最後のみ次状態なし)
                         Q[s_pre, a] = Q[s_pre, a] + alpha * (r + gamma * 0 - Q[s_pre, a]);
-                        if (cycle % 100 == 0)
+                        if (cycle % 100000 == 0)
                         {
-
                             Console.WriteLine(cycle + "回目:" + turn[cycle] + "ターンで終了状態に到達");
                             //Qテーブル確認
                             for (int i = 2; i < 16; i++)
@@ -92,17 +91,66 @@ namespace Tokuron
                     turn[cycle]++;
                 }
             }
-            for (int i = 0; i < 10000; i = i + 10)
+            try
+            {
+                // appendをtrueにすると，既存のファイルに追記
+                //         falseにすると，ファイルを新規作成する
+                var append = false;
+                // 出力用のファイルを開く
+                using (var sw = new System.IO.StreamWriter(@"average.csv", append))
+                {
+                    for (int i = 0; i < 1000000; i = i + 10000)
+                    {
+                        int sum = 0;
+                        for (int j = 0; j < 10000; j++)
+                        {
+                            sum += turn[i + j];
+                        }
+                        int heikin = 0;
+                        heikin = sum / 10000;
+                        sw.WriteLine("{0} ~ {1}, {2},",i + 1, i + 9999, heikin);
+                    }
+                }
+            }
+            catch (System.Exception e)
+            {
+                // ファイルを開くのに失敗したときエラーメッセージを表示
+                System.Console.WriteLine(e.Message);
+            }
+            /*for (int i = 0; i < 10000; i = i + 100)
             {
                 int sum = 0;
-                for (int j = 0; j < 10; j++)
+                for (int j = 0; j < 100; j++)
                 {
                     sum += turn[i + j];
                 }
                 int heikin = 0;
-                heikin = sum / 10;
-                Console.WriteLine(i + ":" + heikin);
+                heikin = sum / 100;
+                Console.WriteLine(heikin);
             }
+            */
+            Console.WriteLine("-----------------------------");
+            try
+            {
+                // appendをtrueにすると，既存のファイルに追記
+                //         falseにすると，ファイルを新規作成する
+                var append = false;
+                // 出力用のファイルを開く
+                using (var sw = new System.IO.StreamWriter(@"test.csv", append))
+                {
+                    for (int i = 0; i < turn.Length; ++i)
+                    {
+                        // 
+                        sw.WriteLine("{0}", turn[i]);
+                    }
+                }
+            }
+            catch (System.Exception e)
+            {
+                // ファイルを開くのに失敗したときエラーメッセージを表示
+                System.Console.WriteLine(e.Message);
+            }
+            
             Console.In.ReadLine();
         }
     }

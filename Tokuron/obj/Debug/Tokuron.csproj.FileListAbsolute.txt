@@ -10,3 +10,9 @@ F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.csprojResolveAssemblyRef
 F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.csproj.CoreCompileInputs.cache
 F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.exe
 F:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.pdb
+G:\情報工学特論\Tokuron\Tokuron\bin\Debug\Tokuron.exe
+G:\情報工学特論\Tokuron\Tokuron\bin\Debug\Tokuron.pdb
+G:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.csprojResolveAssemblyReference.cache
+G:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.csproj.CoreCompileInputs.cache
+G:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.exe
+G:\情報工学特論\Tokuron\Tokuron\obj\Debug\Tokuron.pdb
